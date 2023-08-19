@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<psalm
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    reportMixedIssues="false"
+    findUnusedCode="false"
+    findUnusedBaselineEntry="false"
+    findUnusedVariablesAndParams="false"
+    errorLevel="1"
+>
+    <projectFiles>
+        <directory name="../bin" />
+        <directory name="../src" />
+        <ignoreFiles>
+            <directory name="../vendor" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <PropertyNotSetInConstructor errorLevel="suppress" />
+        <TypeDoesNotContainType errorLevel="suppress" />
+
+        <!-- https://github.com/vimeo/psalm/issues/4823 -->
+        <RedundantPropertyInitializationCheck errorLevel="suppress" />
+        <RedundantCondition errorLevel="suppress" />
+        <UndefinedInterfaceMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="React\Promise\PromiseInterface::otherwise" />
+            </errorLevel>
+        </UndefinedInterfaceMethod>
+
+        <TooManyTemplateParams errorLevel="suppress" />
+    </issueHandlers>
+</psalm>

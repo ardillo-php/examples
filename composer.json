@@ -1,0 +1,27 @@
+{
+    "name": "ardillo/examples",
+    "description": "Ardillo Example Apps",
+    "version": "0.1.0",
+    "license": "MIT",
+    "require": {
+        "ardillo/loop": "^0.1.0",
+        "react/dns": "^1.11",
+        "fakerphp/faker": "^1.23"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ardillo\\Examples\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.9",
+        "vimeo/psalm": "^5.6"
+    },
+    "suggest": {
+        "ext-gd": "For running image converter"
+    },
+    "scripts": {
+        "phpstan": "php -d memory_limit=-1 ./vendor/bin/phpstan analyse -c ./etc/phpstan.neon -n -vvv --ansi --debug --level=max src bin",
+        "psalm": "php -d memory_limit=-1 ./vendor/bin/psalm --config=./etc/psalm.xml --no-cache --no-file-cache --show-info=true"
+    }
+}

@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+error_reporting(-1);
+set_time_limit(0);
+
+if (is_file(__DIR__ . '/../vendor/autoload.php')) {
+    $autoloadPath = __DIR__ . '/../vendor/autoload.php';
+} else if (is_file('./vendor/autoload.php')) {
+    $autoloadPath = './vendor/autoload.php';
+} else {
+    die('Cannot locate vendor/autoload.php file!' . PHP_EOL);
+}
+
+require_once($autoloadPath);
+
+$app = new Ardillo\Examples\CsvEdit\App;
+$app->run();

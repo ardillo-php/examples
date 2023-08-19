@@ -1,0 +1,99 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+error_reporting(-1);
+set_time_limit(0);
+
+if (!extension_loaded('gd')) {
+    die('GD extension is not loaded!' . PHP_EOL);
+}
+
+if ($argc < 3) {
+    die('Usage: ' . $argv[0] . ' <png1> <png2> ... <pngN> <image>' . PHP_EOL);
+}
+
+$imagePath = array_pop($argv);
+array_shift($argv);
+
+// Convert PNG files to an image file
+png2image($argv, $imagePath);
+
+function png2image(array $pngs, string $imagePath): void {
+    // Initialize output string with PHP declaration and namespace import
+    $output = '<?php' . PHP_EOL . PHP_EOL;
+    $output .= 'declare(strict_types=1);' . PHP_EOL . PHP_EOL;
+    $output .= 'use Ardillo\{Color, Image, Size};' . PHP_EOL . PHP_EOL;
+
+    $minWidth = null;
+    $minHeight = null;
+
+    $pixels = [];
+
+    // Loop through each PNG file
+    foreach ($pngs as $png) {
+        // Create an image resource from the PNG file
+        $img = imagecreatefrompng($png);
+        $width = imagesx($img);
+        $height = imagesy($img);
+
+        $key = "{$width}x{$height}";
+
+        // Skip if the image size has already been processed
+        if (isset($pixels[$key])) {
+            continue;
+        }
+
+        // Determine the minimum width and height of all images
+        $minWidth = is_null($minWidth) ? $width : min($minWidth, $width);
+        $minHeight = is_null($minHeight) ? $height : min($minHeight, $height);
+
+        $pixels[$key] = [];
+
+        // Loop through each pixel of the image and add it to the $pixels array
+        for ($y = 0; $y < $height; $y++) {
+            for ($x = 0; $x < $width; $x++) {
+                $rgb = imagecolorat($img, $x, $y);
+                $rgba = imagecolorsforindex($img, $rgb);
+
+                $pixels[$key][] = sprintf(
+                    "Color::fromRGBA(0x%02x%02x%02x%02x)",
+                    $rgba['red'],
+                    $rgba['green'],
+                    $rgba['blue'],
+                    ~$rgba['alpha'] & 0xff
+                );
+            }
+        }
+
+        // Free up memory by destroying the image resource
+        imagedestroy($img);
+    }
+
+    // Add the $pixels array to the output string
+    $output .= '$pixels = [' . PHP_EOL;
+
+    foreach ($pixels as $key => $export) {
+        $output .= "    '{$key}' => [" . PHP_EOL;
+        $output .= '        ' . implode(',' . PHP_EOL . '        ', $export) . PHP_EOL;
+        $output .= '    ],' . PHP_EOL;
+    }
+
+    $output .= '];' . PHP_EOL . PHP_EOL;
+
+    // Create a new Image object with the minimum width and height
+    $output .= '$img = new Image(' . $minWidth . ', ' . $minHeight . ');' . PHP_EOL;
+
+    // Loop through each image size and append the corresponding pixels to the Image object
+    foreach ($pixels as $key => $export) {
+        [$width, $height] = explode('x', $key);
+        $output .= '$img->append($pixels[\'' . $key . '\'], new Size(' . $width . ', ' . $height . '));' . PHP_EOL;
+    }
+
+    // Add the Image object to the output string
+    $output .= PHP_EOL . 'return $img;' . PHP_EOL;
+
+    // Write the output string to the image file
+    file_put_contents($imagePath, $output);
+}
