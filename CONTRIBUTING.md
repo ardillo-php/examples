@@ -6,7 +6,7 @@ Contributions are welcome, and they are greatly appreciated!
 
 There are many different ways, in which you may contribute to this project, including:
 
-   * Opening issues by using the [issue tracker](https://github.com/ardillo/examples/issues)
+   * Opening issues by using the [issue tracker](https://github.com/ardillo-php/examples/issues)
    * Commenting and expanding on open issues
    * Propose fixes to open issues via a pull request
 
