@@ -10,13 +10,13 @@ Then, clone this repository and install its dependencies: `composer install`, an
 
 ### Examples
 
-#### Ardillo Clock
+#### Ardillo Table Gallery
 
-An analogue clock that shows the current time.
+A program which showcases the various table columns offered by Ardillo. Source code is available [here](src/TableGallery).
 
-Run it with `./bin/clock` (or `php bin\clock` on Windows). Source code is available [here](src/Clock).
+Run it with `./bin/tablegallery` (or `php bin\tablegallery` on Windows).
 
-<img loading="lazy" src="https://raw.github.com/ardillo-php/examples/master/shots/ardillo-clock-combo.png" alt="Ardillo Clock" class="width-full">
+<img loading="lazy" src="https://raw.github.com/ardillo-php/examples/master/shots/ardillo-tablegallery-combo.gif" alt="Ardillo Table Gallery" class="width-full">
 
 #### Ardillo CSV Editor
 
@@ -42,13 +42,13 @@ Run it with `./bin/histogram` (or `php bin\histogram` on Windows).
 
 <img loading="lazy" src="https://raw.github.com/ardillo-php/examples/master/shots/ardillo-histogram-combo.gif" alt="Ardillo Histogram" class="width-full">
 
-#### Ardillo Snake Game
+#### Ardillo Clock
 
-An implementation of the classic Snake game. Source code is available [here](src/Snake).
+An analogue clock that shows the current time.
 
-Run it with `./bin/snake` (or `php bin\snake` on Windows).
+Run it with `./bin/clock` (or `php bin\clock` on Windows). Source code is available [here](src/Clock).
 
-<img loading="lazy" src="https://raw.github.com/ardillo-php/examples/master/shots/ardillo-snake-combo.png" alt="Ardillo Snake Game" class="width-full">
+<img loading="lazy" src="https://raw.github.com/ardillo-php/examples/master/shots/ardillo-clock-combo.png" alt="Ardillo Clock" class="width-full">
 
 #### Ardillo Starfield
 
@@ -58,17 +58,17 @@ Run it with `./bin/starfield` (or `php bin\starfield` on Windows).
 
 <img loading="lazy" src="https://raw.github.com/ardillo-php/examples/master/shots/ardillo-starfield-combo.png" alt="Ardillo Starfield" class="width-full">
 
-#### Ardillo Table Gallery
+#### Ardillo Snake Game
 
-A program which showcases the various table columns offered by Ardillo. Source code is available [here](src/TableGallery).
+An implementation of the classic Snake game. Source code is available [here](src/Snake).
 
-Run it with `./bin/tablegallery` (or `php bin\tablegallery` on Windows).
+Run it with `./bin/snake` (or `php bin\snake` on Windows).
 
-<img loading="lazy" src="https://raw.github.com/ardillo-php/examples/master/shots/ardillo-tablegallery-combo.gif" alt="Ardillo Table Gallery" class="width-full">
+<img loading="lazy" src="https://raw.github.com/ardillo-php/examples/master/shots/ardillo-snake-combo.png" alt="Ardillo Snake Game" class="width-full">
 
 ### Static Analysis
 
-This repository is scanned for static analysis issues by [Psalm](https://psalm.dev) and [PHPStan](https://phpstan.org). You can run these tools locally by executing `composer phpstan` and `composer psalm` respectively.
+This repository is scanned for bugs by [Psalm](https://psalm.dev) and [PHPStan](https://phpstan.org). You can run these tools locally by executing `composer phpstan` and `composer psalm` respectively.
 
 ### License
 
