@@ -49,7 +49,7 @@ class Handler extends TableModelHandler
                 ->then(function (array $results) use ($deferred): void {
                     $deferred->resolve($results);
                 })
-                ->otherwise(function (Throwable $t) use ($deferred): void {
+                ->catch(function (Throwable $t) use ($deferred): void {
                     $deferred->resolve([]);
                 });
 
@@ -87,7 +87,7 @@ class Handler extends TableModelHandler
                 assert($this->app instanceof App);
                 $this->app->win->statusBar->setText("Done resolving {$host}");
             })
-            ->otherwise(function (Throwable $t): void {
+            ->catch(function (Throwable $t): void {
                 echo 'Error: ' . $t->getMessage() . PHP_EOL;
             });
     }
@@ -96,7 +96,9 @@ class Handler extends TableModelHandler
     {
         assert($this->app instanceof App);
 
-        // blocking notice!
+        /* Please note the I/O operations against this file are blocking/syncrhonous which is
+         * contrary to the non-blocking/asynchronous nature of ReactPHP. This is done for
+         * simplicity and to keep the example code short and concise. */
         $fp = fopen($path, 'w');
 
         if (!$fp) {

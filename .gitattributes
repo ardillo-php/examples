@@ -4,4 +4,5 @@
 /etc/phpstan.neon export-ignore
 /etc/psalm.xml export-ignore
 /etc/unit.xml.dist export-ignore
+/shots/ export-ignore
 /tests/ export-ignore
