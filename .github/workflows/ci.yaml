@@ -20,7 +20,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: ardillo-php/ext
+          extensions: ardillo-ardillo-php/ext@seed0
       - name: Install Meson and Linux Deps
         run: |
           python3 -m pip install --upgrade pip setuptools wheel
