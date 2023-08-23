@@ -29,7 +29,7 @@ jobs:
       - name: Install Ardillo
         run: |
           git clone https://github.com/ardillo-php/ext.git
-          cd ext && git submodule update --init && phpize && ./configure && make && make install
+          cd ext && git submodule update --init && phpize && ./configure && make && sudo make install
       - name: Install dependencies
         run: composer install
       - name: Run PHPStan
