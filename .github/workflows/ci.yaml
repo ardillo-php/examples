@@ -20,8 +20,19 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-      - run: git clone https://github.com/ardillo-php/ext.git
-      - run: cd ext && git submodule update --init && phpize && ./configure && make && make install
-      - run: composer install
-      - run: composer phpstan
-      - run: composer psalm -- --output-format=github --shepherd
+      - name: Install Meson and Linux Deps
+        run: |
+          python3 -m pip install --upgrade pip setuptools wheel
+          pip3 install meson ninja
+          sudo apt-get update -y
+          sudo apt-get install -y libgtk-3-dev xvfb
+      - name: Install Ardillo
+        run: |
+          git clone https://github.com/ardillo-php/ext.git
+          cd ext && git submodule update --init && phpize && ./configure && make && make install
+      - name: Install dependencies
+        run: composer install
+      - name: Run PHPStan
+        run: composer phpstan
+      - name: Run Psalm
+        run: composer psalm -- --output-format=github
