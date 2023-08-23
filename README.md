@@ -1,4 +1,9 @@
-## Ardillo examples
+## Ardillo Examples
+
+[![CI Status](https://github.com/ardillo/examples/workflows/CI/badge.svg)](https://github.com/ardillo/examples/actions/workflows/ci.yaml)
+[![Psalm Type Coverage](https://shepherd.dev/github/ardillo/examples/coverage.svg)](https://shepherd.dev/github/ardillo/examples)
+[![Latest Stable Version](https://poser.pugx.org/ardillo/examples/v/stable.png)](https://packagist.org/packages/ardillo/examples)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 This repository contains examples of how to use the Ardillo framework.
 

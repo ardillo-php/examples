@@ -3,6 +3,7 @@
     "description": "Ardillo Example Apps",
     "version": "0.1.0",
     "license": "MIT",
+    "type": "project",
     "require": {
         "ardillo/loop": "^0.1.0",
         "react/dns": "^1.11",
