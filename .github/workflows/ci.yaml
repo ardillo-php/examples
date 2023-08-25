@@ -28,6 +28,8 @@ jobs:
           sudo apt-get install -y libgtk-3-0 libgtk-3-dev libglib2.0-0 libglib2.0-dev xvfb
           git clone https://github.com/ardillo-php/ext.git
           cd ext && git submodule update --init && phpize && ./configure && make -j && sudo make install
+          ls -al /usr/lib/php/20220829/ardillo.so
+          pkg-config --cflags --libs gtk+-3.0
           ldd /usr/lib/php/20220829/ardillo.so
           composer install
           composer phpstan
