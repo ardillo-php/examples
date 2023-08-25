@@ -31,6 +31,4 @@ jobs:
           ls -al /usr/lib/php/20220829/ardillo.so
           pkg-config --cflags --libs gtk+-3.0
           ldd /usr/lib/php/20220829/ardillo.so
-          composer install
-          composer phpstan
-          composer psalm -- --output-format=github
+          cd .. && composer install && composer phpstan && composer psalm -- --output-format=github
