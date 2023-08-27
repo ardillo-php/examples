@@ -35,42 +35,9 @@ jobs:
           ldd /usr/lib/php/20220829/ardillo.so
       - name: Install Composer dependencies
         run: composer install
-      - name: Run Static Analysis
-        run: |
-          composer phpstan
-          composer psalm -- --output-format=github
-
-  static-analysis-windows:
-    name: Static Analysis (PHP ${{ matrix.php }} on ${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - windows-2022
-        php:
-          - 8.2
-    steps:
-      - name: Setup MSVC
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: ${{ matrix.arch }}
-      - uses: actions/checkout@v2
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          ini-values: extension=ardillo
-      - name: Prepare environment
-        shell: cmd
-        run: |
-          choco install python3
-          python3 -m pip install --upgrade pip setuptools wheel
-          pip3 install meson ninja
-          git clone https://github.com/ardillo-php/ext.git
-          cd ext && git submodule update --init
-          cd libui-ng && meson setup build --default-library=shared && ninja -C build && cd ..
-          phpize && configure && nmake && nmake install && cd ..
-      - name: Install Composer dependencies
-        run: composer install
+      - name: tmate session if tests fail
+        if: failure() && github.event_name == 'workflow_dispatch'
+        uses: mxschmitt/action-tmate@v3
       - name: Run Static Analysis
         run: |
           composer phpstan
