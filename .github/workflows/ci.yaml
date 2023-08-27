@@ -50,6 +50,10 @@ jobs:
         php:
           - 8.2
     steps:
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.arch }}
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
         with:
