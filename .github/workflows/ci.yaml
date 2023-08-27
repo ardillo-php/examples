@@ -20,7 +20,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           ini-values: extension=ardillo
-      - name: Install Deps and Run Static Analysis
+      - name: Prepare environment
         run: |
           python3 -m pip install --upgrade pip setuptools wheel
           pip3 install meson ninja
@@ -31,6 +31,9 @@ jobs:
           ls -al /usr/lib/php/20220829/ardillo.so
           pkg-config --cflags --libs gtk+-3.0
           ldd /usr/lib/php/20220829/ardillo.so
-          composer install
+      - name: Install Composer dependencies
+        run: composer install
+      - name: Run Static Analysis
+        run: |
           composer phpstan
           composer psalm -- --output-format=github
