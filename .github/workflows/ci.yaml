@@ -33,4 +33,4 @@ jobs:
       - name: Run PHPStan
         run: xvfb-run composer phpstan
       - name: Run Psalm
-        run: xvfb-run composer psalm -- --output-format=github
+        run: xvfb-run composer psalm -- --output-format=github --shepherd
