@@ -1,7 +1,7 @@
 ## Ardillo Examples
 
-[![CI Status](https://github.com/ardillo/examples/workflows/CI/badge.svg)](https://github.com/ardillo/examples/actions/workflows/ci.yaml)
-[![Psalm Type Coverage](https://shepherd.dev/github/ardillo/examples/coverage.svg)](https://shepherd.dev/github/ardillo/examples)
+[![CI Status](https://github.com/ardillo-php/examples/workflows/CI/badge.svg)](https://github.com/ardillo-php/examples/actions/workflows/ci.yaml)
+[![Psalm Type Coverage](https://shepherd.dev/github/ardillo-php/examples/coverage.svg)](https://shepherd.dev/github/ardillo-php/examples)
 [![Latest Stable Version](https://poser.pugx.org/ardillo/examples/v/stable.png)](https://packagist.org/packages/ardillo/examples)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 

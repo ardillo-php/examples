@@ -5,21 +5,32 @@ on:
   pull_request:
 
 jobs:
-  StaticAnalysis:
-    name: StaticAnalysis (PHP ${{ matrix.php }} on ${{ matrix.os }})
+  static-analysis-linux:
+    name: Static Analysis (PHP ${{ matrix.php }} on ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os:
-          - ubuntu-20.04
+          - ubuntu-22.04
         php:
-          - 8.1
           - 8.2
     steps:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-      - run: composer install
-      - run: composer phpstan
-      - run: composer psalm -- --output-format=github --shepherd
+          ini-values: extension=ardillo
+      - name: Prepare environment
+        run: |
+          python3 -m pip install --upgrade pip setuptools wheel
+          pip3 install meson ninja
+          sudo apt-get update -y
+          sudo apt-get install -y libgtk-3-dev xvfb
+          git clone https://github.com/ardillo-php/ext.git
+          cd ext && git submodule update --init && phpize && ./configure && make -j && sudo make install && cd ..
+      - name: Install Composer dependencies
+        run: xvfb-run composer install
+      - name: Run PHPStan
+        run: xvfb-run composer phpstan
+      - name: Run Psalm
+        run: xvfb-run composer psalm -- --output-format=github
