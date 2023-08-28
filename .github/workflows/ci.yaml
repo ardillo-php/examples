@@ -30,7 +30,7 @@ jobs:
           cd ext && git submodule update --init && phpize && ./configure && make -j && sudo make install && cd ..
       - name: Install Composer dependencies
         run: xvfb-run composer install
-      - name: Run Static Analysis
-        run: |
-          xvfb-run composer phpstan
-          xvfb-run composer psalm -- --output-format=github
+      - name: Run PHPStan
+        run: xvfb-run composer phpstan
+      - name: Run Psalm
+        run: xvfb-run composer psalm -- --output-format=github
