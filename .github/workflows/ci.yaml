@@ -25,19 +25,12 @@ jobs:
           python3 -m pip install --upgrade pip setuptools wheel
           pip3 install meson ninja
           sudo apt-get update -y
-          sudo apt-get install -y libgtk-3-dev
+          sudo apt-get install -y libgtk-3-dev xvfb
           git clone https://github.com/ardillo-php/ext.git
           cd ext && git submodule update --init && phpize && ./configure && make -j && sudo make install && cd ..
-          sudo ldconfig
-          sudo ldconfig -p
-          ls -al /usr/lib/php/20220829/ardillo.so
-          pkg-config --cflags --libs gtk+-3.0
-          ldd /usr/lib/php/20220829/ardillo.so
-      - name: tmate
-        uses: mxschmitt/action-tmate@v3
       - name: Install Composer dependencies
-        run: composer install
+        run: xvfb-run composer install
       - name: Run Static Analysis
         run: |
-          composer phpstan
-          composer psalm -- --output-format=github
+          xvfb-run composer phpstan
+          xvfb-run composer psalm -- --output-format=github
