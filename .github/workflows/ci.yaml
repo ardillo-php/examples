@@ -29,8 +29,8 @@ jobs:
           git clone https://github.com/ardillo-php/ext.git
           cd ext && git submodule update --init && phpize && ./configure && make -j && sudo make install && cd ..
       - name: Install Composer dependencies
-        run: xvfb-run composer install
+        run: xvfb-run -a composer install
       - name: Run PHPStan
-        run: xvfb-run composer phpstan
+        run: xvfb-run -a composer phpstan
       - name: Run Psalm
-        run: xvfb-run composer psalm -- --output-format=github --shepherd
+        run: xvfb-run -a composer psalm -- --output-format=github --shepherd
