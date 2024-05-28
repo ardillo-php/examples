@@ -21,6 +21,10 @@
         <PropertyNotSetInConstructor errorLevel="suppress" />
         <TypeDoesNotContainType errorLevel="suppress" />
 
+        <!-- Unfortunately psalm thinks all handler functions expect `mixed` arguments -->
+        <MethodSignatureMismatch errorLevel="suppress" />
+        <ParamNameMismatch errorLevel="suppress" />
+
         <!-- https://github.com/vimeo/psalm/issues/4823 -->
         <RedundantPropertyInitializationCheck errorLevel="suppress" />
         <RedundantCondition errorLevel="suppress" />
