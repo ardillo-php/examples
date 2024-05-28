@@ -49,7 +49,7 @@ class Handler extends AreaHandler
         $minute = (int)$now->format('i');
         $second = (int)$now->format('s');
 
-        echo "Rendering clock at {$hour}:{$minute}:{$second}" . PHP_EOL;
+        printf("Rendering clock at %02d:%02d:%02d" . PHP_EOL, $hour, $minute, $second);
 
         // Calculate the angles of the hour, minute, and second hands
         $hourAngle = ($hour / 12) * 360 - 90;

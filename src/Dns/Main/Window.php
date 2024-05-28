@@ -33,11 +33,6 @@ class Window extends ArdilloWindow
         return 1;
     }
 
-    public function onShouldQuit(): bool
-    {
-        return true;
-    }
-
     public function setup(): void
     {
         assert($this->app instanceof App);

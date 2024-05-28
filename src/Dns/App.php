@@ -47,6 +47,14 @@ class App extends ReactApp
     public Handler $handler;
     public TableModel $model;
 
+    public function onShouldQuit(): bool
+    {
+        /* Manually unset the window so the Table object is destroyed before the TableModel */
+        unset($this->win);
+
+        return true;
+    }
+
     public function onMenuItemClicked(int $id): void
     {
         switch ($id) {

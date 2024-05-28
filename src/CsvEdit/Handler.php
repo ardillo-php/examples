@@ -78,7 +78,9 @@ class Handler extends TableModelHandler
         $this->app->win->container->append($table, true);
 
         for ($i = 0; $i < $cols; $i++) {
-            $table->appendTextColumn(chr(ord('A') + $i), $i, TableModelColumn::AlwaysEditable, NULL);
+            $colName = $i < 26 ? chr(ord('A') + $i) : chr(ord('A') + (int)($i / 26) - 1) . chr(ord('A') + ($i % 26));
+
+            $table->appendTextColumn($colName, $i, TableModelColumn::AlwaysEditable, NULL);
             $table->setColumnWidth($i, $colWidth[$i] * 8);
         }
 
