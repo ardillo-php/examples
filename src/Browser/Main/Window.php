@@ -31,8 +31,6 @@ class Window extends ArdilloWindow
 
     public function setup(): void
     {
-        assert($this->app instanceof App);
-
         $this->vb = new VerticalBox();
         $this->vb->setPadded(false);
 
@@ -64,6 +62,9 @@ class Window extends ArdilloWindow
         $this->setChild($this->vb);
 
         $this->webView->enableDevTools(true);
+
+        assert($this->app instanceof App);
+
         $this->webView->setHtml($this->app->startHtml);
     }
 }

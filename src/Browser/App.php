@@ -34,8 +34,14 @@ class App extends ReactApp
 
     protected function OnInit(): void
     {
-        $this->startHtml = file_get_contents(__DIR__ . '/../../static/html/browser_start.html');
-        $this->customHtml = file_get_contents(__DIR__ . '/../../static/html/browser_custom.html');
+        $startHtml = file_get_contents(__DIR__ . '/../../static/html/browser_start.html');
+        $customHtml = file_get_contents(__DIR__ . '/../../static/html/browser_custom.html');
+
+        assert($startHtml !== false);
+        assert($customHtml !== false);
+
+        $this->startHtml = $startHtml;
+        $this->customHtml = $customHtml;
 
         $this->win = new Main\Window('Ardillo Browser', new Size(960, 800), false);
         $this->win->setup();
