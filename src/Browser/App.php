@@ -13,7 +13,10 @@ use React\Browser\Model\Message;
 class App extends ReactApp
 {
     public const START_URI = 'https://ardillo.dev';
-    public const START_HTML = '<html><body><h1>Welcome to the Ardillo Browser!</h1></body></html>';
+
+    public string $startHtml = '';
+
+    public string $customHtml = '';
 
     public Main\Window $win;
 
@@ -31,6 +34,9 @@ class App extends ReactApp
 
     protected function OnInit(): void
     {
+        $this->startHtml = file_get_contents(__DIR__ . '/../../static/html/browser_start.html');
+        $this->customHtml = file_get_contents(__DIR__ . '/../../static/html/browser_custom.html');
+
         $this->win = new Main\Window('Ardillo Browser', new Size(960, 800), false);
         $this->win->setup();
         $this->win->show();

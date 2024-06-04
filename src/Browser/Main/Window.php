@@ -52,6 +52,7 @@ class Window extends ArdilloWindow
             window.addEventListener('popstate', onNavChange);
             onNavChange();
         EOD);
+        $this->webView->registerUriScheme('custom');
 
         $this->statusBar = new Label('Ready');
 
@@ -63,6 +64,6 @@ class Window extends ArdilloWindow
         $this->setChild($this->vb);
 
         $this->webView->enableDevTools(true);
-        $this->webView->setHtml(App::START_HTML);
+        $this->webView->setHtml($this->app->startHtml);
     }
 }
