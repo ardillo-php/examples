@@ -7,7 +7,8 @@
     "require": {
         "ardillo/loop": "^0.1.0",
         "react/dns": "^1.11",
-        "fakerphp/faker": "^1.23"
+        "fakerphp/faker": "^1.23",
+        "almasaeed2010/adminlte": "^3.2"
     },
     "autoload": {
         "psr-4": {
