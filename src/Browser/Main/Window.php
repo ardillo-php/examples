@@ -10,6 +10,7 @@ use Ardillo\{
     HorizontalBox,
     Label,
     VerticalBox,
+    WebViewParams,
     Window as ArdilloWindow
 };
 
@@ -44,13 +45,26 @@ class Window extends ArdilloWindow
         $this->button = new GoButton('Go');
         $this->hb->append($this->button, false);
 
-        $this->webView = new WebView;
-        $this->webView->setInitScript(<<<EOD
-            function onNavChange() { webkit.messageHandlers.webview.postMessage(document.location.href); }
+        $wParams = new WebViewParams;
+        $wParams->setEnableDevTools(true);
+        $wParams->setInitScript(<<<EOD
+            function onNavChange() {
+                if (typeof webkit !== 'undefined') {
+                    /* Unices */
+                    webkit.messageHandlers.webview.postMessage(document.location.href);
+                } else if (typeof chrome !== 'undefined') {
+                    /* Windows */
+                    chrome.webview.postMessage(document.location.href);
+                } else {
+                    console.error('Unsupported webview engine');
+                }
+            }
             window.addEventListener('popstate', onNavChange);
             onNavChange();
         EOD);
-        $this->webView->registerUriScheme('custom');
+        $wParams->setCustomUriSchemes('custom');
+
+        $this->webView = new WebView($wParams);
 
         $this->statusBar = new Label('Ready');
 
@@ -60,8 +74,6 @@ class Window extends ArdilloWindow
 
         $this->setMargined(false);
         $this->setChild($this->vb);
-
-        $this->webView->enableDevTools(true);
 
         assert($this->app instanceof App);
 

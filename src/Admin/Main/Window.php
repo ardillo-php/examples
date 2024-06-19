@@ -7,6 +7,7 @@ namespace Ardillo\Examples\Admin\Main;
 use Ardillo\Examples\Admin\App;
 use Ardillo\{
     VerticalBox,
+    WebViewParams,
     Window as ArdilloWindow
 };
 
@@ -27,19 +28,21 @@ class Window extends ArdilloWindow
         $this->vb = new VerticalBox();
         $this->vb->setPadded(false);
 
-        $this->webView = new WebView;
-        $this->webView->registerUriScheme('admin');
-        $this->webView->setInitScript(<<<EOD
+        $wParams = new WebViewParams;
+        $wParams->setEnableDevTools(true);
+        $wParams->setInitScript(<<<EOD
             /* Get rid of the demo.js greeting */
             localStorage.setItem('AdminLTE:Demo:MessageShowed', (Date.now()) + (3600 * 1000))
         EOD);
+        $wParams->setCustomUriSchemes('admin');
+
+        $this->webView = new WebView($wParams);
 
         $this->vb->append($this->webView, true);
 
         $this->setMargined(false);
         $this->setChild($this->vb);
 
-        $this->webView->enableDevTools(true);
         $this->webView->setUri('admin:///index.html');
     }
 }
