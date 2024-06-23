@@ -32,7 +32,7 @@ class Window extends ArdilloWindow
         $wParams->setEnableDevTools(true);
         $wParams->setInitScript(<<<EOD
             /* Get rid of the demo.js greeting */
-            localStorage.setItem('AdminLTE:Demo:MessageShowed', (Date.now()) + (3600 * 1000))
+            localStorage.setItem('AdminLTE:Demo:MessageShowed', (Date.now()) + (3600 * 1000));
         EOD);
         $wParams->setCustomUriSchemes('admin');
 
@@ -43,6 +43,6 @@ class Window extends ArdilloWindow
         $this->setMargined(false);
         $this->setChild($this->vb);
 
-        $this->webView->setUri('admin:///index.html');
+        $this->webView->setUri('admin://admin/index.html');
     }
 }
