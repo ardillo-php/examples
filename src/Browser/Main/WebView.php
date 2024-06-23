@@ -28,15 +28,20 @@ class WebView extends ArdilloWebView
     {
         assert($this->app instanceof App);
 
+        $uri = $request->getUri();
+        $parsed = parse_url($uri);
+
         $body = str_replace(
             [
-                '{{ scheme }}',
                 '{{ uri }}',
+                '{{ scheme }}',
+                '{{ host }}',
                 '{{ path }}',
             ], [
-                $request->getScheme(),
-                $request->getUri(),
-                $request->getPath(),
+                $uri,
+                $parsed['scheme'] ?? '',
+                $parsed['host'] ?? '',
+                $parsed['path'] ?? '',
             ],
             $this->app->customHtml
         );
